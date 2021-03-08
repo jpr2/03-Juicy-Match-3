@@ -16,7 +16,7 @@ func _ready():
 	randomize()
 
 func _physics_process(_delta):
-	if dying and $Tween.is_active():
+	if dying and not $Tween.is_active():
 		queue_free()
 	if selected:
 		$Selected.emitting = true
@@ -33,7 +33,6 @@ func move_piece(change):
 	position = target_position
 
 func die(): 
-	dying = true
 	var target_color = $Sprite.modulate
 	target_color.s = 1
 	target_color.h = randf()
@@ -52,3 +51,4 @@ func die():
 
 	if color == "Cow":
 		get_node("/root/Game/Cow").playing = true
+	dying = true
